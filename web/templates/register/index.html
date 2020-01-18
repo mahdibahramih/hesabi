@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +7,12 @@
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="./opensans-font.css">
-	<link rel="stylesheet" type="text/css" href="./line-awesome/css/line-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static "register/opensans-font.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "register/line-awesome/css/line-awesome.min.css" %}">
 	<!-- Jquery -->
 <!--	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 	--><!-- Main Style Css -->
-	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="{% static "register/style.css" %}">
 </head>
 <body class="form-v4">
 <script>
@@ -28,8 +28,8 @@ function goBack() {
 				<br/>
 				<p style='margin-top:20 px !important;' >  حسابی یک نرم افزار حسابداری شخصی یکپارچه است که شما میتونید با پر کردن فرم سمت راست به از امکانات این نرم افزار استفاده کنید <p>
 			</div>
-			<form class="form-detail"  method="post" id="myform" action="">
-				<h2>REGISTER FORM</h2>
+			<form class="form-detail"  method="post" id="myform" action="" style='text-align:center;'>
+				<h2>صفحه ثبت نام</h2>
 				<div class="form-group">
 					<div class="form-row form-row-1" Style=' text-align: right'>
 						<label for="first_name">نام</label>
@@ -68,8 +68,8 @@ function goBack() {
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<!--	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-	--><script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script type="text/javascript" language="JavaScript">
 		//--------------------------------
 		// This code compares two fields in a form and submit it
