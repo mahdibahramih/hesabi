@@ -1,0 +1,5 @@
+Django==3.0.2
+django-function-cache==1.2
+django-grappelli==2.12.2
+django-redis==4.10.0
+redis==3.0.1
