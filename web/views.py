@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import expense , income , group , group_expense , group_income , group_member
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+import datetime
 # Create your views here.
 
 
@@ -65,3 +66,20 @@ def dashbord(request):
 @csrf_exempt
 def test(req):
     return HttpResponse('hi')
+
+def mainpage(req):
+    if(req.method=='GET'):
+        return render(req,'userpanel/mainpage.html') 
+
+@csrf_exempt  
+def send_expense(request):
+    if(request.method=='POST'):
+        User.objects.get(username=request.user.username)
+        this_text=request.POST['subject']
+        this_date=request.POST['date']
+        this_time=datetime.datetime.now()
+        this_amount=request.POST['cost']
+        this_source=request.POST['source']      
+        exp=expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
+        exp.save()
+

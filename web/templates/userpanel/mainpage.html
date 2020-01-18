@@ -202,13 +202,15 @@
                 <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
             </div>
             <div class="modal-body">
+                <form class="form" method='POST' action='/send_expense/'>
                 <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
                 <input type="text" placeholder="برداشت شده از کدام حساب؟" name="source">
-                <input type="text" placeholder="از طریق" name="type">
+                <input class="form-control" type="date" name="date" value="2020-01-19" placeholder="تاریخ">
                 <input type="text" placeholder="توضیحات خرج را وارد کنید" name="subject">
                 <center>
                     <button type="submit">ارسال</button>
                 </center>
+                </form>
             </div>
         </div>
     </div>
