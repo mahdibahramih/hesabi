@@ -10,7 +10,17 @@ input[type=text] {
     border-radius: 12px;
 }
 
-
+input[type=date] {
+    width: 90%;
+    height: 49px;
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size:16px;
+    border-radius: 12px;
+}
 /*فونت*/
 @font-face {
     font-family: Vazir;
