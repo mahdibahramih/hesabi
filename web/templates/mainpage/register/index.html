@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Register</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="./opensans-font.css">
+	<link rel="stylesheet" type="text/css" href="./line-awesome/css/line-awesome.min.css">
+	<!-- Jquery -->
+<!--	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	--><!-- Main Style Css -->
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body class="form-v4">
+<script>
+function goBack() {
+  window.history.back();
+
+}
+</script>
+	<div class="page-content">
+		<div class="form-v4-content">
+			<div class="form-left" Style=' text-align: right'>
+				<h1 style='margin-top:10 px;'> !! به حسابی خوش آمدید  </h1>
+				<br/>
+				<p style='margin-top:20 px !important;' >  حسابی یک نرم افزار حسابداری شخصی یکپارچه است که شما میتونید با پر کردن فرم سمت راست به از امکانات این نرم افزار استفاده کنید <p>
+			</div>
+			<form class="form-detail"  method="post" id="myform" action="">
+				<h2>REGISTER FORM</h2>
+				<div class="form-group">
+					<div class="form-row form-row-1" Style=' text-align: right'>
+						<label for="first_name">نام</label>
+						<input type="text" name="first_name" id="first_name" class="input-text" required>
+					</div>
+					<div class="form-row form-row-1" Style=' text-align: right'>
+						<label for="last_name">نام خانوادگی</label>
+						<input type="text" name="last_name" id="last_name" class="input-text" required>
+					</div>
+				</div>
+				<div class="form-row" Style=' text-align: right'>
+					<label for="your_email">آدرس ایمیل</label>
+					<input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" required>
+				</div>
+				<div class="form-group " Style=' text-align: right ; ' >
+					<div class="form-row form-row-1 " Style=' text-align: right'>
+						<label for="password">پسورد</label>
+						<input type="password" name="password" id="password" class="input-text" required align='right'>
+					</div>
+				<!--	<div class="form-row form-row-1">
+						<label for="comfirm-password">Comfirm Password</label>
+						<input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
+					</div>-->
+				</div>
+				<!--<div class="form-checkbox">
+					<label class="container"><p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
+					  	<input type="checkbox" name="checkbox">
+					  	<span class="checkmark"></span>
+					</label>
+				</div>-->
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="ثبت نام">
+					<input type="button" onclick="goBack()" class="register" value="بازگشت به خانه">
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	--><script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script type="text/javascript" language="JavaScript">
+		//--------------------------------
+		// This code compares two fields in a form and submit it
+		// if they're the same, or not if they're different.
+		//--------------------------------
+	</script> 
+		 
+	<script>
+		// just for the demos, avoids form submit
+		jQuery.validator.setDefaults({
+		  	debug: true,
+		  	success:  function(label){
+        		label.attr('id', 'valid');
+   		 	},
+		});
+		$( "#myform" ).validate({
+		  	rules: {
+			    password: "required",
+		    	comfirm_password: {
+		      		equalTo: "#password"
+		    	}
+		  	},
+		  	messages: {
+		  		first_name: {
+		  			required: "Please enter a firstname"
+		  		},
+		  		last_name: {
+		  			required: "Please enter a lastname"
+		  		},
+		  		your_email: {
+		  			required: "Please provide an email"
+		  		},
+		  		password: {
+	  				required: "Please enter a password"
+		  		},
+		  		comfirm_password: {
+		  			required: "Please enter a password",
+		      		equalTo: "Wrong Password"
+		    	}
+		  	}
+		});
+	</script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
