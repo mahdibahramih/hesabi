@@ -50,4 +50,4 @@ class group_income(models.Model):
     time = models.TimeField()
     amount = models.BigIntegerField()
     def  __unicode__(self):
-        return "{}    {}".format(self.text , self.amount)
+        return "{}    {}    ".format(self.text , self.amount)

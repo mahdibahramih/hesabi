@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>گروه های من</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "userpanel/style.css" %} " rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src= "{% static "userpanel/jquery-3.3.1.min.js" %}"></script>
+</head>
+<body>
+<!--قسمت navbar صفحه-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light text" >
+
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                                <span >
+                                     <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="person-img">
+                                </span>
+                    <div class="media-body mr-2 d-none d-sm-block">
+                        <span style="margin-left: 15px" class="mb-0 text-sm  font-weight-bold">نام کاربر</span>
+                    </div>
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-left text-right">
+
+                <a href="/profile" class="dropdown-item">
+                    <span>پروفایل من</span>
+                </a>
+                <a href="/index" class="dropdown-item">
+                    <span>خروج</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+</nav>
+<!--قسمت button group list-->
+<div class="row col-sm-2" style="float: right; text-align: right;">
+    <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
+            data-target="#SendingـExpenses">ارسال مخارج
+    </button>
+    <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
+            data-target="#Sendingـincome">ارسال درآمد
+    </button>
+    <button  id="Computing_btn" type="button" class="list-group-item list-group-item-action">محاسبه
+    </button>
+    <button id="report_btn" type="button" class="list-group-item list-group-item-action" >گزارش
+        گیری
+    </button>
+    <button id="add_person" type="button" class="list-group-item list-group-item-action" >اضافه کردن افراد
+    </button>
+    <button id="group_btn" type="button" class="list-group-item list-group-item-action"onclick="location.href='/mainpage'" >بازگشت به صفحه کاربری
+    </button>
+</div>
+<!--برای قسمت ارسال خرج modal-->
+<div class="modal fade" id="SendingـExpenses" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
+                <span onclick="document.getElementById('report').style.display='none'" class="close"
+                      data-dismiss="modal" title="بستن">&times;</span>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
+                <input type="text" placeholder="برداشت شده از کدام حساب؟" name="source">
+                <input type="text" placeholder="از طریق" name="type">
+                <input type="text" placeholder="توضیحات خرج را وارد کنید" name="subject">
+                <center>
+                    <button type="submit">ارسال</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modalبرای ارسال درآمد -->
+<div class="modal fade" id="Sendingـincome" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
+                <span onclick="document.getElementById('report').style.display='none'" class="close"
+                      data-dismiss="modal" title="بستن">&times;</span>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
+                <input type="text" placeholder="واریز شده به کدام حساب؟" name="source">
+                <input type="text" placeholder="از طریق" name="type">
+                <input type="text" placeholder="توضیحات درآمد را وارد کنید" name="subject">
+                <center>
+                    <button type="submit">ارسال</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<!--برای پیش بینی modal-->
+<div class="modal fade" id="predict" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
+                <span onclick="document.getElementById('report').style.display='none'" class="close"
+                      data-dismiss="modal" title="بستن">&times;</span>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+            </div>
+            <div style="text-align: right" class="modal-body">
+                <span> : احتمال درآمد امروز شما</span>
+                <br/><br/>
+                <span> : احتمال درآمد این ماه شما</span>
+                <br/><br/>
+                <span> : احتمال خرج امروز شما</span>
+                <br/><br/>
+                <span> : احتمال خرج این ماه شما</span>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal برای گزلرش گیری-->
+<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
+                <span onclick="document.getElementById('report').style.display='none'" class="close"
+                      data-dismiss="modal" title="بستن">&times;</span>
+                <h4 style="text-align:center ;margin-top: 40px;">تمامی گزارش های شما</h4>
+            </div>
+            <div class="modal-body">
+                <script>
+                    for (var i = 0; i < 6; i++) {
+                        document.write("<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur beatae ducimus esse et, expedita explicabo iste libero, minima non odit porro praesentium quo quos similique sit ullam ut. Consequatur.</p>");
+                    }
+                </script>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
