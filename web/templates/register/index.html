@@ -28,7 +28,7 @@ function goBack() {
 				<br/>
 				<p style='margin-top:20 px !important;' >  حسابی یک نرم افزار حسابداری شخصی یکپارچه است که شما میتونید با پر کردن فرم سمت راست به از امکانات این نرم افزار استفاده کنید <p>
 			</div>
-			<form class="form-detail"  method="post" id="myform" action="" style='text-align:center;'>
+			<form class="form-detail"  method="post" id="myform" action="/register/" style='text-align:center;'>
 				<h2>صفحه ثبت نام</h2>
 				<div class="form-group">
 					<div class="form-row form-row-1" Style=' text-align: right'>
@@ -49,10 +49,10 @@ function goBack() {
 						<label for="password">پسورد</label>
 						<input type="password" name="password" id="password" class="input-text" required align='right'>
 					</div>
-				<!--	<div class="form-row form-row-1">
-						<label for="comfirm-password">Comfirm Password</label>
-						<input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
-					</div>-->
+					<div class="form-row form-row-1">
+						<label for="comfirm-password">نام کاربری</label>
+						<input type="text" name="username" id="d" class="input-text" required>
+					</div>
 				</div>
 				<!--<div class="form-checkbox">
 					<label class="container"><p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
@@ -68,7 +68,7 @@ function goBack() {
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script type="text/javascript" language="JavaScript">
 		//--------------------------------
@@ -76,7 +76,7 @@ function goBack() {
 		// if they're the same, or not if they're different.
 		//--------------------------------
 	</script> 
-		 
+		--> 
 	<script>
 		// just for the demos, avoids form submit
 		jQuery.validator.setDefaults({
@@ -88,9 +88,7 @@ function goBack() {
 		$( "#myform" ).validate({
 		  	rules: {
 			    password: "required",
-		    	comfirm_password: {
-		      		equalTo: "#password"
-		    	}
+		    	
 		  	},
 		  	messages: {
 		  		first_name: {
@@ -105,10 +103,7 @@ function goBack() {
 		  		password: {
 	  				required: "Please enter a password"
 		  		},
-		  		comfirm_password: {
-		  			required: "Please enter a password",
-		      		equalTo: "Wrong Password"
-		    	}
+		  		
 		  	}
 		});
 	</script>
