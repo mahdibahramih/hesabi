@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.models import User
@@ -14,7 +14,7 @@ def home(req):
 
 
 @csrf_exempt
-def login(request):
+def user_login(request):
     if(request.method == 'GET'):
         return render(request ,'Login_v1/index.html')  
     else:
@@ -24,14 +24,13 @@ def login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                messages.add_message(request, messages.SUCCESS, "You're Logged in Successfully")
-                return redirect('/accounts/dashboard/')
+                return redirect('/dashboard/')
             else:
                 messages.add_message(request, messages.ERROR, "Your account is disabled.")
-                return redirect("/home/")
+                return redirect("/login/")
         else:
             messages.add_message(request, messages.ERROR, "Invalid login details supplied.")
-            return redirect("/home")
+            return redirect("/login/")
 
 
 @csrf_exempt     
@@ -46,10 +45,23 @@ def register(request):
         this_pass = request.POST['password']
         us =User.objects.create_user(username = this_username , email= this_email , password= this_pass , first_name = this_first_name , last_name = this_last_name )
         us.save()
+        return redirect("/login")
 
 
 
-@login_required
+@login_required(login_url='/login/')
 def add_group(req):
     new = group(name=req['group_name'] , discription=req['group_discription'] , admin=req.user )
     new.save()
+
+
+
+
+@login_required(login_url='/login/')
+def dashbord(request):
+    return render(request , 'userpanel/mainpage.html')
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def test(req):
+    return HttpResponse('hi')
