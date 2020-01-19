@@ -6,6 +6,11 @@ urlpatterns = [
     path('dashboard/' , views.dashbord),
     path('test/' , views.test),
     path('' ,views.home ), 
-    path('mainpage/',views.mainpage),
-    path('send_expense/',views.send_expense),      
+    path('index/',views.home),
+    path('profile/',views.profile),
+    path('predict/',views.predict),
+    path('report/',views.report),
+    path('group/',views.group),
+    path('send_expense/',views.send_expense),  
+    path('send_income/',views.send_income),     
 ]

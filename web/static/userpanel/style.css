@@ -9,6 +9,7 @@ input[type=text] {
     font-size:16px;
     border-radius: 12px;
 }
+span{float:right}
 
 input[type=date] {
     width: 90%;
@@ -19,6 +20,7 @@ input[type=date] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size:16px;
+    text-align: center;
     border-radius: 12px;
 }
 /*فونت*/

@@ -139,7 +139,7 @@
             <a style="margin-top: 10px" class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                     <div  class=" media-body mr-2 d-none d-sm-block">
-                        <span class=" mb-0 text-sm badge badge-primary badge-pill">8</span>
+                        <span style="float : left"class=" mb-0 text-sm badge badge-primary badge-pill">8</span>
                         <span class="mb-0 text-sm  font-weight-bold">اعلان ها</span>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
 
 
 <!--قسمت button group list-->
-<div class="row col-sm-2 dropleft" style="float: right; text-align: right;">
+<div class="row col-sm-2 btn-group dropleft" style="float: right; text-align: right;">
     <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
             data-target="#SendingـExpenses">ارسال مخارج
     </button>
@@ -178,13 +178,13 @@
         گیری
     </button>
     <button type="button" class="list-group-item list-group-item-action dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        گروه های من
-    </button>
-    <div id="mygroupitems" style="text-align: center " class="dropdown-menu">
-        <a class="dropdown-item" href="/group">گروه یک</a>
-        <a class="dropdown-item" href="/group">گروه دو</a>
-        <a class="dropdown-item" href="/group">گروه سه</a>
-    </div>
+    گروه های من
+     </button>
+     <div id="mygroupitems"class="dropdown-menu">
+    <a class="dropdown-item" href="/group/">گروه یک</a>
+    <a class="dropdown-item" href="/group/">گروه دو</a>
+    <a class="dropdown-item" href="/group/">گروه سه</a>
+     </div>
     <button id="add_group" type="button" class="list-group-item list-group-item-action"data-toggle="modal" data-target="#addgroup" >افزودن گروه
     </button>
 </div>
@@ -224,16 +224,18 @@
                 <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
                 <span onclick="document.getElementById('report').style.display='none'" class="close"
                       data-dismiss="modal" title="بستن">&times;</span>
-                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال دخل</h4>
             </div>
             <div class="modal-body">
+            <form class="form" method='POST' action='/send_income/'>
                 <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
                 <input type="text" placeholder="واریز شده به کدام حساب؟" name="source">
-                <input type="text" placeholder="از طریق" name="type">
+                <input class="form-control" type="date" name="date" value="2020-01-19" placeholder="تاریخ">
                 <input type="text" placeholder="توضیحات درآمد را وارد کنید" name="subject">
                 <center>
                     <button type="submit">ارسال</button>
                 </center>
+                </form>
             </div>
         </div>
     </div>
@@ -247,7 +249,7 @@
                 <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
                 <span onclick="document.getElementById('report').style.display='none'" class="close"
                       data-dismiss="modal" title="بستن">&times;</span>
-                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+                <h4 style="text-align:center ;margin-top: 40px;">پیش بینی</h4>
             </div>
             <div style="text-align: right" class="modal-body">
                 <span> : احتمال درآمد امروز شما</span>
@@ -295,8 +297,7 @@
             </div>
             <div class="modal-body">
                 <input type="text" placeholder="اسم گروه" name="cost">
-                <input type="text" placeholder="اضافه کردن اعضا" name="source">
-
+                <input type="text" placeholder=" توضیحی درباره گروه" name="source">
                 <center>
                     <button type="submit">ثبت</button>
                 </center>
@@ -312,43 +313,50 @@
         <div  id="last_spend" class="col-5 border bg-light">
             <br/>
             <h5 style="color: #f25f5c"> : آخرین خرج شما</h5>
-            <span>مبلغ : </span>
-            <span>400000</span>
+            {% if last_expense %}
+            <span> &nbsp; : مبلغ</span>
+            <span>{{last_expense.amount}}</span>
             <br/>
-            <span>حساب : </span>
-            <span>بانک تجارت</span>
+            <span>&nbsp; : حساب</span>
+            <span>{{last_expense.sour}}</span>
             <br/>
-            <span>از طریق :</span>
-            <span>عابر بانک</span>
+            <span>&nbsp; : ساعت</span>
+            <span>{{last_expense.time}}</span>
             <br/>
-            <span>تاریخ : </span>
-            <span>2019/11/26</span>
+            <span>&nbsp; : تاریخ</span>
+            <span>{{last_expense.date}}</span>
             <br/>
-            <span>توضیحات : </span>
-            <span>پرداخت قبض</span>
+            <span>&nbsp; : توضیحات </span>
+            <span>{{last_expense.text}}</span>
             <br/>
+                
             <br/>
+            {% endif %} 
         </div>
 
         <div id="last_income" class="col-5 border bg-light">
             <br/>
             <h5 style="color: #f25f5c"> : آخرین درآمد شما</h5>
-            <span>مبلغ : </span>
-            <span>400000</span>
+            {% if last_income %}
+            <span> &nbsp; : مبلغ</span>
+            
+            <span>{{last_income.amount}}</span>
             <br/>
-            <span>حساب : </span>
-            <span>بانک تجارت</span>
+            <span>&nbsp; : حساب</span>
+            <span>{{last_income.sour}}</span>
             <br/>
-            <span>از طریق :</span>
-            <span>عابر بانک</span>
+            <span >&nbsp; : ساعت</span>
+                  {{last_income.time}}
             <br/>
-            <span>تاریخ : </span>
-            <span>2019/11/26</span>
+            <span>&nbsp; : تاریخ</span>
+            <span>{{last_income.date}}</span>
             <br/>
-            <span>توضیحات : </span>
-            <span>پرداخت قبض</span>
+            <span>&nbsp; : توضیحات</span>
+            <span>{{last_income.text}}</span>
             <br/>
+                
             <br/>
+            {% endif %} 
         </div>
 
         <div id="taraz" class="col-5 border bg-light">
@@ -460,12 +468,12 @@
 <script type="text/javascript">$(document).ready(function () {});
 $("#predict_btn").click(function () {
 
-    $("#block").load("predict");
+    $("#block").load("/predict/");
 });
 
 $("#report_btn").click(function () {
 
-    $("#block").load("report");
+    $("#block").load("/report/");
 });
 </script>
 </html>

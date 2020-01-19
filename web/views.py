@@ -56,20 +56,38 @@ def add_group(req):
     new.save()
 
 
-
-
 @login_required(login_url='/login/')
 def dashbord(request):
-    return render(request , 'userpanel/mainpage.html')
+    this_last_income=income.objects.filter(user_name=request.user).last()
+    this_last_expense=expense.objects.filter(user_name=request.user).last()
+    return render(request , 'userpanel/mainpage.html',{'last_income':this_last_income,'last_expense':this_last_expense})
 
 @login_required(login_url='/login/')
 @csrf_exempt
 def test(req):
     return HttpResponse('hi')
 
-def mainpage(req):
+@login_required(login_url='/login/')
+def profile(req):
     if(req.method=='GET'):
-        return render(req,'userpanel/mainpage.html') 
+        return render(req,'userpanel/profile.html') 
+
+@login_required(login_url='/login/')
+def predict(req):
+    if(req.method=='GET'):
+        return render(req,'userpanel/predict.html')         
+
+
+@login_required(login_url='/login/')
+def report(req):
+    if(req.method=='GET'):
+        return render(req,'userpanel/report.html') 
+
+@login_required(login_url='/login/')
+def group(req):
+    if(req.method=='GET'):
+        return render(req,'userpanel/group.html')         
+
 
 @csrf_exempt  
 def send_expense(request):
@@ -83,3 +101,16 @@ def send_expense(request):
         exp=expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
         exp.save()
 
+
+@csrf_exempt  
+def send_income(request):
+    if(request.method=='POST'):
+        User.objects.get(username=request.user.username)
+        this_text=request.POST['subject']
+        this_date=request.POST['date']
+        this_time=datetime.datetime.now()
+        this_amount=request.POST['cost']
+        this_source=request.POST['source']      
+        exp=income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
+        exp.save()
+        messages.add_message(request, messages.SUCCESS, "دخل شما با موفقیت ثبت شد")
