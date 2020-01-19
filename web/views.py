@@ -17,22 +17,25 @@ def home(req):
 
 @csrf_exempt
 def user_login(request):
-    if(request.method == 'GET'):
-        return render(request ,'Login_v1/index.html')  
+    if  request.user.is_authenticated :
+        return redirect('/dashboard/')
     else:
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('/dashboard/')
-            else:
-                messages.add_message(request, messages.ERROR, "Your account is disabled.")
-                return redirect("/login/")
+        if(request.method == 'GET'):
+            return render(request ,'Login_v1/index.html')  
         else:
-            messages.add_message(request, messages.ERROR, "Invalid login details supplied.")
-            return redirect("/login/")
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('/dashboard/')
+                else:
+                    messages.add_message(request, messages.ERROR, "Your account is disabled.")
+                    return redirect("/login/")
+            else:
+                messages.add_message(request, messages.ERROR, "Invalid login details supplied.")
+                return redirect("/login/")
 
 
 @csrf_exempt     
