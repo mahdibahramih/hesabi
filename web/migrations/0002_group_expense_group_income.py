@@ -12,29 +12,4 @@ class Migration(migrations.Migration):
         ('web', '0001_initial'),
     ]
 
-    operations = [
-        migrations.CreateModel(
-            name='group_income',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=50)),
-                ('date', models.DateField()),
-                ('time', models.TimeField()),
-                ('amount', models.BigIntegerField()),
-                ('this_group', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='web.group')),
-                ('user_name', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='group_expense',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=50)),
-                ('date', models.DateField()),
-                ('time', models.TimeField()),
-                ('amount', models.BigIntegerField()),
-                ('this_group', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='web.group')),
-                ('user_name', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-    ]
+   

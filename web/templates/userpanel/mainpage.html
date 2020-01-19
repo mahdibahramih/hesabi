@@ -296,11 +296,13 @@
               <h4 style="text-align:center ;margin-top: 40px;margin-left: 170px">افزودن گروه</h4>
             </div>
             <div class="modal-body">
-                <input type="text" placeholder="اسم گروه" name="cost">
-                <input type="text" placeholder=" توضیحی درباره گروه" name="source">
-                <center>
-                    <button type="submit">ثبت</button>
-                </center>
+                <form action='/addgroup/' method='POST'>
+                    <input type="text" placeholder="اسم گروه" name="group_name">
+                    <input type="text" placeholder=" توضیحی درباره گروه" name="group_discription">
+                    <center>
+                        <input type="submit" value='ثبت'>
+                    </center>
+                </form>
             </div>
         </div>
     </div>

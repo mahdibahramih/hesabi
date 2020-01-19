@@ -3,7 +3,7 @@ from django.shortcuts import render , redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import expense , income , group , group_expense , group_income , group_member
+from .models import expense , income , groupha , group_expense , group_income , group_member
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
@@ -52,9 +52,14 @@ def register(request):
 
 
 @login_required(login_url='/login/')
-def add_group(req):
-    new = group(name=req['group_name'] , discription=req['group_discription'] , admin=req.user )
-    new.save()
+@csrf_exempt
+def add_group(request):
+    if(request.method == 'POST'):
+        gou = request.POST['group_name']
+        dis = request.POST['group_discription']
+        ne = groupha(name=gou , discription = dis , admin = request.user , status='active')
+        ne.save()
+        return redirect('/dashboard/')
 
 
 @login_required(login_url='/login/')
@@ -116,5 +121,5 @@ def send_income(request):
         this_source=request.POST['source']      
         exp=income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
         exp.save()
-        messages.add_message(request, messages.SUCCESS, "درآمد جدید شما قبت شد ")
+        messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
         return redirect('/dashboard/')
