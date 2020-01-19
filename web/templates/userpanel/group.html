@@ -62,9 +62,9 @@
     <button id="report_btn" type="button" class="list-group-item list-group-item-action" >گزارش
         گیری
     </button>
-    <button id="add_person" type="button" class="list-group-item list-group-item-action" >اضافه کردن افراد
+     <button id="add_person" type="button" class="list-group-item list-group-item-action"data-toggle="modal" data-target="#addperson" >اضافه کردن افراد
     </button>
-    <button id="group_btn" type="button" class="list-group-item list-group-item-action"onclick="location.href='/mainpage'" >بازگشت به صفحه کاربری
+    <button id="group_btn" type="button" class="list-group-item list-group-item-action"onclick="location.href='/dashboard'" >بازگشت به صفحه کاربری
     </button>
 </div>
 <!--برای قسمت ارسال خرج modal-->
@@ -159,6 +159,43 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="addperson" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <span onclick="document.getElementById('report').style.display='none'" class="close"
+                          data-dismiss="modal" title="بستن">&times;</span>
+                  <center>  <h4 style="margin-left: 100px; margin-top: 40px;">اضافه کردن افراد به گروه</h4></center>
+                </div>
+
+                    <form>
+                        <div class="form align-items-center">
+
+                            <div class="col-sm-9">
+                                <br/><br/>
+                                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                <div class="input-group sm-3">
+                                    <div class="input-group-prepend">
+                                        <div style="margin-left: 85px" class="input-group-text">@</div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="اسم کاربر">
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="col-auto">
+                                <center>
+                                <input style="background-color: #ffe066;color: white" type="submit" value="عضو کردن" class="btn"/>
+                                </center>
+                            </div><br/><br/>
+                        </div>
+                    </form>
+                    <br/>
+
+            </div>
+        </div>
+    </div>
 
 
 </body>

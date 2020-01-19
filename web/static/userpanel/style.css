@@ -1,5 +1,5 @@
 /*قسمت دیزاین input های model ها*/
-input[type=text] {
+.modal-body input[type=text] {
     width: 90%;
     padding: 12px 20px;
     margin: 8px 26px;
@@ -10,6 +10,16 @@ input[type=text] {
     border-radius: 12px;
 }
 span{float:right}
+#mygroups{
+
+    direction: rtl;
+
+}
+#mgroup button{
+    height: 50px;
+    width: 400px;
+    border-radius: 20px;
+}
 
 input[type=date] {
     width: 90%;
@@ -38,7 +48,7 @@ input[type=date] {
 
 
 /*دیزایین button های model ها*/
-button {
+.modal-body button[type="submit"] {
     background-color: #ffe066 ;
     color: white;
     padding: 14px 20px;
@@ -47,8 +57,7 @@ button {
     cursor: pointer;
     width: 20%;
     font-size:20px;
-
-    border-radius: 20px;
+    border-radius: 20px!important;
 }
 ::placeholder {
     text-align: center;

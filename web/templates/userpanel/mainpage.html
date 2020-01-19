@@ -177,14 +177,7 @@
     <button id="report_btn" type="button" class="list-group-item list-group-item-action" >گزارش
         گیری
     </button>
-    <button type="button" class="list-group-item list-group-item-action dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    گروه های من
-     </button>
-     <div id="mygroupitems"class="dropdown-menu">
-    <a class="dropdown-item" href="/group/">گروه یک</a>
-    <a class="dropdown-item" href="/group/">گروه دو</a>
-    <a class="dropdown-item" href="/group/">گروه سه</a>
-     </div>
+    <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#mygroups">گروه های من</button>
     <button id="add_group" type="button" class="list-group-item list-group-item-action"data-toggle="modal" data-target="#addgroup" >افزودن گروه
     </button>
 </div>
@@ -307,6 +300,32 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="mygroups" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span onclick="document.getElementById('report').style.display='none'" class="close"
+                      data-dismiss="modal" title="بستن">&times;</span>
+                <h4 style="text-align:right ;margin-top: 40px;">لیست گروه های من</h4>
+            </div>
+            <center>
+            <div id="mgroup" class=" container-fluid modal-body ">
+
+                <button onclick="location.href='/group/';" class="btn btn-outline-dark btn  col-md-8">گروه ۱</button>
+                <br/><br/>
+                <button onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۲</button>
+                <br/><br/>
+                <button  onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۳</button>
+                <br/><br/>
+            </div>
+            </center>
+        </div>
+    </div>
+</div>
+
+
+
 <br/>
 
 <!--قسمت block های سایت-->
