@@ -18,6 +18,11 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static "userpanel/jquery-3.3.1.min.js" %}"></script>
+    
+    
+    
+    
+    
     <!--کدهای نمودار-->
     <script>
         window.onload = function () {
@@ -120,7 +125,7 @@
                                      <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="person-img">
                                 </span>
                     <div class="media-body mr-2 d-none d-sm-block">
-                        <span style="margin-left: 15px" class="mb-0 text-sm  font-weight-bold">نام کاربر</span>
+                        <span style="margin-left: 15px" class="mb-0 text-sm  font-weight-bold">{{ request.user.username }} سلام </span>
                     </div>
                 </div>
 
@@ -130,7 +135,7 @@
                 <a href="/profile" class="dropdown-item">
                     <span>پروفایل من</span>
                 </a>
-                <a href="/index" class="dropdown-item">
+                <a href="/logout" class="dropdown-item">
                     <span>خروج</span>
                 </a>
             </div>
@@ -177,7 +182,7 @@
     <button id="report_btn" type="button" class="list-group-item list-group-item-action" >گزارش
         گیری
     </button>
-    <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#mygroups">گروه های من</button>
+    <button type="button" class="list-group-item list-group-item-action" id='show_group_modal_btn'>گروه های من</button>
     <button id="add_group" type="button" class="list-group-item list-group-item-action"data-toggle="modal" data-target="#addgroup" >افزودن گروه
     </button>
 </div>
@@ -485,6 +490,24 @@
 
 </body>
 
+<!-- script for load groups for user-->
+<script>
+$(document).ready(function(){
+  $("#show_group_modal_btn").click(function(){
+    $("#mygroups").modal("show");
+  });
+  $("#myModal").on('show.bs.modal', function(){
+    alert('The modal is about to be shown.');
+  });
+});
+</script>
+
+
+
+
+
+
+
 
 <script type="text/javascript">$(document).ready(function () {});
 $("#predict_btn").click(function () {
@@ -496,5 +519,6 @@ $("#report_btn").click(function () {
 
     $("#block").load("/report/");
 });
+
 </script>
 </html>

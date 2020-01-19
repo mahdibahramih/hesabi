@@ -5,7 +5,7 @@ urlpatterns = [
     path('register/' ,views.register),
     path('dashboard/' , views.dashbord),
     path('test/' , views.test),
-    path('index/',views.home),
+    path('logout/',views.user_logout),
     path('profile/',views.profile),
     path('predict/',views.predict),
     path('report/',views.report),
@@ -13,7 +13,7 @@ urlpatterns = [
     path('send_expense/',views.send_expense),  
     path('send_income/',views.send_income),     
     path('addgroup/' , views.add_group),
-    
+    path('home/' ,views.home ), 
     
     
     path('' ,views.home ), 
