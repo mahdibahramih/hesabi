@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render , redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -89,6 +90,7 @@ def group(req):
         return render(req,'userpanel/group.html')         
 
 
+
 @csrf_exempt  
 def send_expense(request):
     if(request.method=='POST'):
@@ -100,7 +102,8 @@ def send_expense(request):
         this_source=request.POST['source']      
         exp=expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
         exp.save()
-
+        messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
+        return redirect('/dashboard/')
 
 @csrf_exempt  
 def send_income(request):
@@ -113,4 +116,5 @@ def send_income(request):
         this_source=request.POST['source']      
         exp=income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
         exp.save()
-        messages.add_message(request, messages.SUCCESS, "دخل شما با موفقیت ثبت شد")
+        messages.add_message(request, messages.SUCCESS, "درآمد جدید شما قبت شد ")
+        return redirect('/dashboard/')
