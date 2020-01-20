@@ -317,13 +317,20 @@
             </div>
             <center>
             <div id="mgroup" class=" container-fluid modal-body ">
-
-                <button onclick="location.href='/group/';" class="btn btn-outline-dark btn  col-md-8">گروه ۱</button>
+                
+                {% for i in mygroupsname %}
+                <form method='POST' action='/group/'>
+                <input type='submit' class="btn btn-outline-dark btn  col-md-8" value={{ i.name }}>
+                <input type='text' name='idman' value={{i.id}} style='display: none;'>
                 <br/><br/>
+                </form>
+                {% endfor %}
+                <!--
+                    
                 <button onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۲</button>
                 <br/><br/>
                 <button  onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۳</button>
-                <br/><br/>
+                <br/><br/>-->
             </div>
             </center>
         </div>
@@ -524,16 +531,6 @@
 </body>
 
 <!-- script for load groups for user-->
-<script>
-$(document).ready(function(){
-  $("#show_group_modal_btn").click(function(){
-    $("#mygroups").modal("show");
-  });
-  $("#myModal").on('show.bs.modal', function(){
-    alert('The modal is about to be shown.');
-  });
-});
-</script>
 
 
 

@@ -13,11 +13,14 @@ import datetime
 def home(req):
     return render(req , 'mainpage/index.html' , context=None)
 
+
+
 @csrf_exempt
 @login_required(login_url='/login/')
 def user_logout(request):
     logout(request)
     return redirect('/home/')
+
 
 @csrf_exempt
 def user_login(request):
@@ -66,6 +69,8 @@ def add_group(request):
         dis = request.POST['group_discription']
         ne = groupha(name=gou , discription = dis , admin = request.user , status='active')
         ne.save()
+        mem = group_member.objects.create( this_user=request.user , this_group = ne)
+        mem.save()
         return redirect('/dashboard/')
 
 
@@ -73,7 +78,9 @@ def add_group(request):
 def dashbord(request):
     this_last_income=income.objects.filter(user_name=request.user).last()
     this_last_expense=expense.objects.filter(user_name=request.user).last()
-    return render(request , 'userpanel/mainpage.html',{'last_income':this_last_income,'last_expense':this_last_expense})
+    user_group_id = group_member.objects.filter(this_user=request.user.id).all()
+    user_group_name = groupha.objects.filter(id__in = user_group_id).values('name','id')
+    return render(request , 'userpanel/mainpage.html',{'last_income':this_last_income,'last_expense':this_last_expense , 'mygroupsname' : user_group_name})
 
 @login_required(login_url='/login/')
 @csrf_exempt
@@ -96,10 +103,18 @@ def report(req):
     if(req.method=='GET'):
         return render(req,'userpanel/report.html') 
 
+
+
 @login_required(login_url='/login/')
-def group(req):
-    if(req.method=='GET'):
-        return render(req,'userpanel/group.html')         
+@csrf_exempt
+def group(request):
+    if(request.method == 'POST'):
+        id = (request.POST['idman'])
+        con = {'groupid':id}
+        return render(request,'userpanel/group.html' , context=con)     
+    else:
+        print(request.method)
+        return HttpResponse('no')    
 
 
 
