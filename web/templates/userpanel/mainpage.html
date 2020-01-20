@@ -140,12 +140,12 @@
                 </a>
             </div>
         </li>
-        <li style="margin-left: 18px" class=" row nav-item dropdown">
+         <li style="margin-left: 18px" class=" row nav-item dropdown">
             <a style="margin-top: 10px" class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                     <div  class=" media-body mr-2 d-none d-sm-block">
-                        <span style="float : left"class=" mb-0 text-sm badge badge-primary badge-pill">8</span>
-                        <span class="mb-0 text-sm  font-weight-bold">اعلان ها</span>
+                        <span style="float : left;margin-top:2px"class=" mb-0 text-sm badge badge-primary badge-pill">8</span>
+                        <span style="margin-left: 3px" class="mb-0 text-sm  font-weight-bold">اعلان ها</span>
                     </div>
                 </div>
             </a>
@@ -158,7 +158,7 @@
                     <button style="text-align: center" type="button" class="btn btn-success">قبول</button>
                 </a>
                 <a href="#!" class="link">
-                    <button style="text-align: center" type="button" class="btn btn-danger">رد</button>
+                    <button style="text-align: center;width:55px" type="button" class="btn btn-danger">رد</button>
                 </a>
                 </center>
             </div>
@@ -356,8 +356,23 @@
             <span>&nbsp; : توضیحات </span>
             <span>{{last_expense.text}}</span>
             <br/>
-                
             <br/>
+            {% else %}
+                <span> &nbsp; : مبلغ</span>
+                <span></span>
+                <br/>
+                <span>&nbsp; : حساب</span>
+                <span></span>
+                <br/>
+                <span >&nbsp; : ساعت</span> 
+                <br/>
+                <span>&nbsp; : تاریخ</span>
+                <span></span>
+                <br/>
+                <span>&nbsp; : توضیحات</span>
+                <span></span>
+                <br/>   
+                <br/>
             {% endif %} 
         </div>
 
@@ -383,6 +398,23 @@
             <br/>
                 
             <br/>
+            {% else %}
+                <span> &nbsp; : مبلغ</span>
+                <span></span>
+                <br/>
+                <span>&nbsp; : حساب</span>
+                <span></span>
+                <br/>
+                <span >&nbsp; : ساعت</span> 
+                <br/>
+                <span>&nbsp; : تاریخ</span>
+                <span></span>
+                <br/>
+                <span>&nbsp; : توضیحات</span>
+                <span></span>
+                <br/>   
+                <br/>
+
             {% endif %} 
         </div>
 
@@ -402,7 +434,7 @@
         <div id="bill" class="col-5 border bg-light">
             <br/>
             <h5 style="color: #f25f5c"> : یادداشت های اخیر</h5>
-            <br><br><br/><br/><br/>
+            
         </div>
 
     </div>
