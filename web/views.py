@@ -99,9 +99,11 @@ def predict(req):
 
 
 @login_required(login_url='/login/')
-def report(req):
-    if(req.method=='GET'):
-        return render(req,'userpanel/report.html') 
+def report(request):
+    if(request.method=='GET'):
+        expenses = expense.objects.filter(user_name=request.user).values('text' , 'date' , 'time' , 'amount','sour')
+        con ={'data' : expenses}
+        return render(request,'userpanel/report.html' , context=con) 
 
 
 
