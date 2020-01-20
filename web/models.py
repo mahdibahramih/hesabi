@@ -30,11 +30,14 @@ class groupha(models.Model):
     status = models.CharField(max_length=10)
     def  __unicode__(self):
         return "{}    {}     {}".format(self.admin , self.name , self.status)
+
+
 class group_member(models.Model):
     this_user = models.ForeignKey(User , on_delete=models.CASCADE)
     this_group = models.ForeignKey(groupha , on_delete=models.CASCADE)
     def  __unicode__(self):
         return "{}    {} ".format(self.this_user , self.this_group)
+
 
 class group_expense(models.Model):
     text = models.CharField(max_length=50)
@@ -46,6 +49,8 @@ class group_expense(models.Model):
     def  __unicode__(self):
         return "{}    {}     {}      {}".format( self.user_name,self.this_group ,self.text , self.amount)
 
+
+
 class group_income(models.Model):
     text = models.CharField(max_length=50)
     user_name = models.ForeignKey(User , on_delete=models.CASCADE)
@@ -56,3 +61,9 @@ class group_income(models.Model):
     def  __unicode__(self):
         return "{}    {}     {}      {}".format( self.user_name,self.this_group ,self.text , self.amount)
 
+
+class temporary_group_member(models.Model):
+    this_user = models.ForeignKey(User , on_delete=models.CASCADE)
+    this_group = models.ForeignKey(groupha , on_delete=models.CASCADE)
+    def  __unicode__(self):
+        return "{}    {} ".format(self.this_user , self.this_group)

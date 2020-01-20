@@ -22,10 +22,31 @@
 <div style="margin-left:200px" class="col-sm-10" >
     <h5 class="col-sm-11" style="text-align:right ;margin-top: 20px;float: right"> : تمامی گزارش های شما</h5>
     <br/><br/><br/>
+    
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">توضیح</th>
+      <th scope="col">تاریخ</th>
+      <th scope="col">ساعت</th>
+      <th scope="col">مقدار</th>
+      <th scope="col">منبع</th>
+    </tr>
+  </thead>
+
     {% for i in data %}
-        <p> {{ i.text }} </p>
-        <br/>
+        <tr>
+      <th scope="row">1</th>
+      <td>{{ i.text }}</td>
+      <td>{{ i.data }}</td>
+      <td>{{ i.time }}</td>
+      <td>{{ i.amount }}</td>
+      <td>{{ i.sour }}</td>
+    </tr>
         {% endfor %}
+  <tbody>
+</table>
 </div>
 </body>
 </html>

@@ -32,7 +32,7 @@
                                      <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="person-img">
                                 </span>
                     <div class="media-body mr-2 d-none d-sm-block">
-                        <span style="margin-left: 15px" class="mb-0 text-sm  font-weight-bold">نام کاربر</span>
+                        <span style="margin-left: 15px" class="mb-0 text-sm  font-weight-bold">{{ groupid }}</span>
                     </div>
                 </div>
             </a>
@@ -172,7 +172,7 @@
                   <center>  <h4 style="margin-left: 100px; margin-top: 40px;">اضافه کردن افراد به گروه</h4></center>
                 </div>
 
-                    <form>
+                    <form action='/addtogroup/' method='POST'>
                         <div class="form align-items-center">
 
                             <div class="col-sm-9">
@@ -181,7 +181,8 @@
                                 <div class="input-group sm-3">
                                     <div class="input-group-prepend">
                                         <div style="margin-left: 85px" class="input-group-text">@</div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="اسم کاربر">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" name='username' placeholder="اسم کاربر">
+                                    <input type'text' name='idman' value={{ groupid }}  style='display: none;' >
                                     </div>
                                 </div>
                             </div>

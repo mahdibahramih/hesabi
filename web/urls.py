@@ -15,6 +15,9 @@ urlpatterns = [
     path('addgroup/' , views.add_group),
     path('home/' ,views.home ),
     path('editprofile/' ,views.editprofile ),
+    path('addtogroup/' ,views.addtogroup ),
+    path('disagreejoinreq/' , views.disagreejoinreq),
+     path('acceptjoinreq/' , views.acceptjoinreq),
     # path('send_group_expense/' ,views.send_group_expense ),
     # path('send_group_income/' ,views.send_group_income ), 
     

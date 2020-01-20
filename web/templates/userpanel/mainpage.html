@@ -146,17 +146,22 @@
                 </div>
             </a>
             <div id="news" class="dropdown-menu dropdown-menu-arrow dropdown-menu-left text-right">
+                {% for i in join_req %}
+                <form action='/acceptjoinreq/' method='POST'>
                 <a href="profile.html" class="dropdown-item">
-                    <span> ! سلام شما به گروه وب دعوت شده اید</span>
+                    <span>  {{i.name}} شما به گروه   </span>
                 </a>
+                <input type='text' name='idman' value={{i.id}} style='display: none;'>
                 <center>
                 <a href="#!" class="">
-                    <button style="text-align: center" type="button" class="btn btn-success">قبول</button>
+                    <input style="text-align: center" type="submit" class="btn btn-success" value='قبول'>
                 </a>
                 <a href="#!" class="link">
-                    <button style="text-align: center;width:55px" type="button" class="btn btn-danger">رد</button>
+                    <input formaction="/disagreejoinreq/" style="text-align: center;width:55px" type="button" class="btn btn-danger" value='رد'>          
                 </a>
                 </center>
+                </form>
+                {% endfor %}
             </div>
         </li>
     </ul>

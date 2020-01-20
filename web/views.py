@@ -3,7 +3,7 @@ from django.shortcuts import render , redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import expense , income , groupha , group_expense , group_income , group_member
+from .models import expense , income , groupha , group_expense , group_income , group_member , temporary_group_member
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
@@ -21,6 +21,7 @@ def home(req):
 def user_logout(request):
     logout(request)
     return redirect('/home/')
+
 
 
 @csrf_exempt
@@ -44,6 +45,7 @@ def user_login(request):
             else:
                 messages.add_message(request, messages.ERROR, "Invalid login details supplied.")
                 return redirect("/login/")
+
 
 
 @csrf_exempt     
@@ -79,9 +81,13 @@ def add_group(request):
 def dashbord(request):
     this_last_income=income.objects.filter(user_name=request.user).last()
     this_last_expense=expense.objects.filter(user_name=request.user).last()
-    user_group_id = group_member.objects.filter(this_user=request.user.id).all()
-    user_group_name = groupha.objects.filter(id__in = user_group_id).values('name','id')
-    return render(request , 'userpanel/mainpage.html',{'last_income':this_last_income,'last_expense':this_last_expense , 'mygroupsname' : user_group_name})
+    user_group_id = group_member.objects.filter(this_user=request.user).values('this_group')
+    user_group_name = groupha.objects.filter(id__in = user_group_id)
+    join_requests_id = temporary_group_member.objects.filter(this_user=request.user).values('this_group')
+    join_requests = groupha.objects.filter(id__in = join_requests_id)
+    print(user_group_id)
+    print(user_group_name)
+    return render(request , 'userpanel/mainpage.html',{'last_income':this_last_income,'last_expense':this_last_expense , 'mygroupsname' : user_group_name , 'join_req' : join_requests})
 
 @login_required(login_url='/login/')
 @csrf_exempt
@@ -134,10 +140,7 @@ def group(request):
     if(request.method == 'POST'):
         id = (request.POST['idman'])
         con = {'groupid':id}
-        return render(request,'userpanel/group.html' , context=con)     
-    else:
-        print(request.method)
-        return HttpResponse('no')    
+        return render(request,'userpanel/group.html' , context=con)         
 
 
 @login_required(login_url='/login/')
@@ -172,6 +175,49 @@ def send_income(request):
         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
         return redirect('/dashboard/')
 
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def addtogroup(request):
+    if(request.method == 'POST'):
+        member_user = request.POST['username']
+        if User.objects.filter(username=member_user).exists():
+            id = (request.POST['idman'])
+            con = { 'groupid':id }
+            groooop = groupha.objects.get(id=id)
+            temp = temporary_group_member.objects.create(this_user=request.user , this_group=groooop)
+            temp.save()
+            return render(request,'userpanel/group.html' , context=con)
+        else:
+            return(HttpResponse('b'))
+
+
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def acceptjoinreq(request):
+    groooop = groupha.objects.get(id=request.POST['idman'])
+    temp = temporary_group_member.objects.filter(this_user=request.user , this_group=groooop )
+    temp.delete()
+    mem = group_member.objects.create( this_user=request.user , this_group = groooop)
+    mem.save()
+    return redirect('/dashboard/')
+
+
+
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def disagreejoinreq(request):
+    groooop = groupha.objects.get(id=request.POST['idman'])
+    temp = temporary_group_member.objects.filter(this_user=request.user , this_group=groooop )
+    temp.delete()
+    return redirect('/dashboard/')
+
+
 # @login_required(login_url='/login/')
 # @csrf_exempt  
 # def send_group_expense(request):
@@ -201,3 +247,6 @@ def send_income(request):
 #         exp.save()
 #         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
 #         return redirect('/group/')
+
+
+
