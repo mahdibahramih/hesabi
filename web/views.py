@@ -88,10 +88,12 @@ def test(req):
     return HttpResponse('hi')
 
 @login_required(login_url='/login/')
-def profile(req):
-    if(req.method=='GET'):
-        return render(req,'userpanel/profile.html') 
-
+def profile(request):
+    user_data=User.objects.filter(username=request.user).values('username','first_name','last_name','email')
+    print(user_data)
+    con={'data' : user_data}
+    return render(request,'userpanel/profile.html',context=con)
+        
 @login_required(login_url='/login/')
 def predict(req):
     if(req.method=='GET'):
@@ -119,7 +121,7 @@ def group(request):
         return HttpResponse('no')    
 
 
-
+@login_required(login_url='/login/')
 @csrf_exempt  
 def send_expense(request):
     if(request.method=='POST'):
@@ -134,6 +136,9 @@ def send_expense(request):
         messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
         return redirect('/dashboard/')
 
+
+
+@login_required(login_url='/login/')
 @csrf_exempt  
 def send_income(request):
     if(request.method=='POST'):
@@ -147,3 +152,33 @@ def send_income(request):
         exp.save()
         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
         return redirect('/dashboard/')
+
+# @login_required(login_url='/login/')
+# @csrf_exempt  
+# def send_group_expense(request):
+#     if(request.method=='POST'):
+#         User.objects.get(username=request.user.username)
+#         this_text=request.POST['subject']
+#         this_date=request.POST['date']
+#         this_time=datetime.datetime.now()
+#         this_amount=request.POST['cost']
+#         # groupid=con.groupid
+#         exp=group_expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
+#         exp.save()
+#         messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
+#         return redirect('userpanel/group.html')
+
+
+# @login_required(login_url='/login/')
+# @csrf_exempt  
+# def send_group_income(request):
+#     if(request.method=='POST'):
+#         User.objects.get(username=request.user.username)
+#         this_text=request.POST['subject']
+#         this_date=request.POST['date']
+#         this_time=datetime.datetime.now()
+#         this_amount=request.POST['cost']      
+#         exp=group_income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
+#         exp.save()
+#         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
+#         return redirect('userpanel/group.html')

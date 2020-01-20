@@ -13,7 +13,9 @@ urlpatterns = [
     path('send_expense/',views.send_expense),  
     path('send_income/',views.send_income),     
     path('addgroup/' , views.add_group),
-    path('home/' ,views.home ), 
+    path('home/' ,views.home ),
+    # path('send_group_expense/' ,views.send_group_expense ),
+    # path('send_group_income/' ,views.send_group_income ), 
     
     
     path('' ,views.home ), 

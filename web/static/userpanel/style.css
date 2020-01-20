@@ -45,10 +45,25 @@ input[type=date] {
 *{
     font-family: Vazir !important;
 }
+#mgroup input[type="submit"]{
 
+    border-radius: 15px;
+
+}
+#add_group_btn{
+    background-color: #ffe066 ;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 26px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    font-size:20px;
+    border-radius: 20px!important;
+}
 
 /*دیزایین button های model ها*/
-.modal-body button[type="submit"],input[type="submit"] {
+.modal-body button[type="submit"] {
     background-color: #ffe066 ;
     color: white;
     padding: 14px 20px;

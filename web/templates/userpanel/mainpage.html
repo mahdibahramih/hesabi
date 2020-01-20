@@ -19,10 +19,6 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     
-    
-    
-    
-    
     <!--کدهای نمودار-->
     <script>
         window.onload = function () {
@@ -263,7 +259,7 @@
         </div>
     </div>
 </div>
-<!--modal برای گزلرش گیری-->
+<!--modal برای گزارش گیری-->
 <div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -299,7 +295,7 @@
                     <input type="text" placeholder="اسم گروه" name="group_name">
                     <input type="text" placeholder=" توضیحی درباره گروه" name="group_discription">
                     <center>
-                        <input type="submit" value='ثبت'>
+                        <input id="add_group_btn" type="submit" value='ثبت'>
                     </center>
                 </form>
             </div>
@@ -325,12 +321,6 @@
                 <br/><br/>
                 </form>
                 {% endfor %}
-                <!--
-                    
-                <button onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۲</button>
-                <br/><br/>
-                <button  onclick="location.href='/group/';" class="btn btn-outline-dark col-md-8">گروه ۳</button>
-                <br/><br/>-->
             </div>
             </center>
         </div>
@@ -531,11 +521,6 @@
 </body>
 
 <!-- script for load groups for user-->
-
-
-
-
-
 
 
 

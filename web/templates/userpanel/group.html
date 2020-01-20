@@ -52,10 +52,10 @@
 <!--قسمت button group list-->
 <div class="row col-sm-2" style="float: right; text-align: right;">
     <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
-            data-target="#SendingـExpenses">ارسال مخارج
+            data-target="#Sending_group_Expenses">ارسال مخارج گروه
     </button>
     <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
-            data-target="#Sendingـincome">ارسال درآمد
+            data-target="#Sending_group_income"> ارسال درآمد گروه
     </button>
     <button  id="Computing_btn" type="button" class="list-group-item list-group-item-action">محاسبه
     </button>
@@ -68,7 +68,7 @@
     </button>
 </div>
 <!--برای قسمت ارسال خرج modal-->
-<div class="modal fade" id="SendingـExpenses" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+<div class="modal fade" id="Sending_group_Expenses" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -76,22 +76,23 @@
                 <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
                 <span onclick="document.getElementById('report').style.display='none'" class="close"
                       data-dismiss="modal" title="بستن">&times;</span>
-                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال مخارج گروه</h4>
             </div>
             <div class="modal-body">
+                <form class="form" method='POST' action='/send_group_expense/'>
                 <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
-                <input type="text" placeholder="برداشت شده از کدام حساب؟" name="source">
-                <input type="text" placeholder="از طریق" name="type">
+                <input class="form-control" type="date" name="date" value="2020-01-19" placeholder="تاریخ">
                 <input type="text" placeholder="توضیحات خرج را وارد کنید" name="subject">
                 <center>
                     <button type="submit">ارسال</button>
                 </center>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <!--modalبرای ارسال درآمد -->
-<div class="modal fade" id="Sendingـincome" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+<div class="modal fade" id="Sending_group_income" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -99,22 +100,23 @@
                 <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
                 <span onclick="document.getElementById('report').style.display='none'" class="close"
                       data-dismiss="modal" title="بستن">&times;</span>
-                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+                <h4 style="text-align:center ;margin-top: 40px;">ارسال دخل گروه</h4>
             </div>
             <div class="modal-body">
+            <form class="form" method='POST' action='/send_group_income/'>
                 <input type="text" placeholder=" مبلغ را وارد کنید" name="cost">
-                <input type="text" placeholder="واریز شده به کدام حساب؟" name="source">
-                <input type="text" placeholder="از طریق" name="type">
+                <input class="form-control" type="date" name="date" value="2020-01-19" placeholder="تاریخ">
                 <input type="text" placeholder="توضیحات درآمد را وارد کنید" name="subject">
                 <center>
                     <button type="submit">ارسال</button>
                 </center>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <!--برای پیش بینی modal-->
-<div class="modal fade" id="predict" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+<div class="modal fade" id="Computing" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -122,16 +124,16 @@
                 <img src="{% static "userpanel/1.png" %}" alt="Avatar" class="avatar">
                 <span onclick="document.getElementById('report').style.display='none'" class="close"
                       data-dismiss="modal" title="بستن">&times;</span>
-                <h4 style="text-align:center ;margin-top: 40px;">ارسال خرج</h4>
+                <h4 style="text-align:center ;margin-top: 40px;">محاسبه</h4>
             </div>
             <div style="text-align: right" class="modal-body">
-                <span> : احتمال درآمد امروز شما</span>
+                <span> : بلا بلا بلاااا</span>
                 <br/><br/>
-                <span> : احتمال درآمد این ماه شما</span>
+                <span> : بلا بلا بلاااا</span>
                 <br/><br/>
-                <span> : احتمال خرج امروز شما</span>
+                <span> : بلا بلا بلاااا</span>
                 <br/><br/>
-                <span> : احتمال خرج این ماه شما</span>
+                <span> : ابلا بلا بلااااا</span>
                 <br/>
             </div>
         </div>
