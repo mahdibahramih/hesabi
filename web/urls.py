@@ -14,6 +14,7 @@ urlpatterns = [
     path('send_income/',views.send_income),     
     path('addgroup/' , views.add_group),
     path('home/' ,views.home ),
+    path('editprofile/' ,views.editprofile ),
     # path('send_group_expense/' ,views.send_group_expense ),
     # path('send_group_income/' ,views.send_group_income ), 
     

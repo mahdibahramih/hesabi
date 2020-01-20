@@ -7,6 +7,7 @@ from .models import expense , income , groupha , group_expense , group_income , 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 
@@ -89,10 +90,28 @@ def test(req):
 
 @login_required(login_url='/login/')
 def profile(request):
-    user_data=User.objects.filter(username=request.user).values('username','first_name','last_name','email')
+    user_data=User.objects.get(username=request.user)
     print(user_data)
-    con={'data' : user_data}
-    return render(request,'userpanel/profile.html',context=con)
+    return render(request,'userpanel/profile.html',{'data_user':user_data})
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def editprofile(request):
+    if(request.method=='POST'):
+        new_username=request.POST['idname']
+        new_firstname=request.POST['name']
+        new_familyname=request.POST['familyname']
+        new_email=request.POST['email']
+        newpassword=request.POST['pwd']
+        print(newpassword)
+        user=request.user
+        user.set_password(newpassword)
+        User.objects.filter(username=request.user).update(first_name=new_firstname,last_name=new_familyname,email=new_email,username=new_username)
+        user.save()
+        return redirect('/profile/')
+
+
         
 @login_required(login_url='/login/')
 def predict(req):
@@ -166,7 +185,7 @@ def send_income(request):
 #         exp=group_expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
 #         exp.save()
 #         messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
-#         return redirect('userpanel/group.html')
+#         return redirect('/group/')
 
 
 # @login_required(login_url='/login/')
@@ -181,4 +200,4 @@ def send_income(request):
 #         exp=group_income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
 #         exp.save()
 #         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
-#         return redirect('userpanel/group.html')
+#         return redirect('/group/')
