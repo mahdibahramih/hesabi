@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from .models import expense , income , groupha , group_expense , group_income , group_member , temporary_group_member
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-import datetime
+from datetime import datetime , timedelta
 from django.contrib.auth import update_session_auth_hash
+from django.db.models import Avg
 # Create your views here.
 
 
@@ -133,12 +134,6 @@ def editprofile(request):
         return redirect('/profile/')
 
 
-        
-@login_required(login_url='/login/')
-def predict(req):
-    if(req.method=='GET'):
-        return render(req,'userpanel/predict.html')         
-
 
 @login_required(login_url='/login/')
 def report(request):
@@ -165,7 +160,7 @@ def send_expense(request):
         User.objects.get(username=request.user.username)
         this_text=request.POST['subject']
         this_date=request.POST['date']
-        this_time=datetime.datetime.now()
+        this_time=datetime.now()
         this_amount=request.POST['cost']
         this_source=request.POST['source']      
         exp=expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
@@ -182,7 +177,7 @@ def send_income(request):
         User.objects.get(username=request.user.username)
         this_text=request.POST['subject']
         this_date=request.POST['date']
-        this_time=datetime.datetime.now()
+        this_time=datetime.now()
         this_amount=request.POST['cost']
         this_source=request.POST['source']      
         exp=income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,sour=this_source)
@@ -240,7 +235,7 @@ def send_group_expense(request):
         User.objects.get(username=request.user.username)
         this_text=request.POST['subject']
         this_date=request.POST['date']
-        this_time=datetime.datetime.now()
+        this_time=datetime.now()
         this_amount=request.POST['cost']
         this_group_id=request.POST['idman']
         id_gp=groupha.objects.get(id=this_group_id)
@@ -258,7 +253,7 @@ def send_group_income(request):
         User.objects.get(username=request.user.username)
         this_text=request.POST['subject']
         this_date=request.POST['date']
-        this_time=datetime.datetime.now()
+        this_time=datetime.now()
         this_amount=request.POST['cost']
         this_group_id=request.POST['idman']
         id_gp=groupha.objects.get(id=this_group_id)
@@ -269,3 +264,34 @@ def send_group_income(request):
         return render(request,'userpanel/group.html' , context=con) 
 
 
+
+
+
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def predict(request): 
+    now = datetime.now()
+    last_weak_sameday_expense=expense.objects.filter(user_name = request.user , date =now - timedelta(days = 7 )).aggregate(Avg('amount'))
+    print(last_weak_sameday_expense)
+    last = now - timedelta(days = 7)
+    last_weak_sum_expense =expense.objects.filter(user_name = request.user , date__range=( last - timedelta(last.weekday()),last )).aggregate(Avg('amount'))
+    this_weak_sum_expense =expense.objects.filter(user_name = request.user , date__range=(now - timedelta(now.weekday()),now)).aggregate(Avg('amount'))
+    print(this_weak_sum_expense)
+    if(last_weak_sum_expense['amount__avg'] != None and this_weak_sum_expense['amount__avg'] != None ):
+        tagirat_hazine = (this_weak_sum_expense['amount__avg']) / (last_weak_sum_expense['amount__avg'])
+        takhmin =  last_weak_sameday_expense['amount__avg'] * (tagirat_hazine * 0.75)
+        return render(request,'userpanel/predict.html' , context={'expansefortoday' : takhmin}) 
+    return render(request,'userpanel/predict.html' , context={'expansefortoday' : last_weak_sameday_expense['amount__avg']})
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def groupreport(request):
+    groupid = (request.GET['grouprepoid'])
+    if(request.method=='GET'):
+        expenses = group_expense.objects.filter(this_group=groupid).values('text' , 'date' , 'time' , 'amount','user_name')
+        print(expense)
+        con ={'data' : expenses}
+        return render(request,'userpanel/report.html' , context=con)

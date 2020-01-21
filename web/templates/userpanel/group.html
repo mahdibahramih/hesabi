@@ -141,6 +141,11 @@
         </div>
     </div>
 </div>
+<center>
+<div id="block" class="card-columns row col-md-9">
+
+</div>
+</center>
 <!--modal برای گزلرش گیری-->
 <div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
      aria-hidden="true">
@@ -202,6 +207,17 @@
         </div>
     </div>
 
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+$("#report_btn").click(function () {
+
+    $("#block").load("/groupreport/?grouprepoid={{groupid}}" );
+});
+});
+</script>
 
 </body>
 </html>

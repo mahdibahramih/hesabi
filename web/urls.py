@@ -22,6 +22,7 @@ urlpatterns = [
     path('editpwd/' ,views.editpwd ),
     path('send_group_expense/' ,views.send_group_expense ),
     path('send_group_income/' ,views.send_group_income ), 
+    path('groupreport/' , views.groupreport),
     
     
     path('' ,views.home ), 
