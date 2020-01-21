@@ -17,9 +17,11 @@ urlpatterns = [
     path('editprofile/' ,views.editprofile ),
     path('addtogroup/' ,views.addtogroup ),
     path('disagreejoinreq/' , views.disagreejoinreq),
-     path('acceptjoinreq/' , views.acceptjoinreq),
-    # path('send_group_expense/' ,views.send_group_expense ),
-    # path('send_group_income/' ,views.send_group_income ), 
+    path('acceptjoinreq/' , views.acceptjoinreq),
+    path('editprofile/' ,views.editprofile ),
+    path('editpwd/' ,views.editpwd ),
+    path('send_group_expense/' ,views.send_group_expense ),
+    path('send_group_income/' ,views.send_group_income ), 
     
     
     path('' ,views.home ), 

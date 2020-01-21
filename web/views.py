@@ -103,6 +103,21 @@ def profile(request):
 
 @login_required(login_url='/login/')
 @csrf_exempt
+def editpwd(request):
+    if(request.method=='POST'):
+        newpassword=request.POST['pwd']
+        newpasswordrepeat=request.POST['pwdrepet']
+        if(newpassword==newpasswordrepeat):
+            useri=request.user
+            useri.set_password(newpassword)
+            useri.save()
+            return redirect('/profile/')
+        else:    
+            return redirect('/profile/') 
+
+
+@login_required(login_url='/login/')
+@csrf_exempt
 def editprofile(request):
     if(request.method=='POST'):
         new_username=request.POST['idname']
@@ -218,35 +233,39 @@ def disagreejoinreq(request):
     return redirect('/dashboard/')
 
 
-# @login_required(login_url='/login/')
-# @csrf_exempt  
-# def send_group_expense(request):
-#     if(request.method=='POST'):
-#         User.objects.get(username=request.user.username)
-#         this_text=request.POST['subject']
-#         this_date=request.POST['date']
-#         this_time=datetime.datetime.now()
-#         this_amount=request.POST['cost']
-#         # groupid=con.groupid
-#         exp=group_expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
-#         exp.save()
-#         messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
-#         return redirect('/group/')
+@login_required(login_url='/login/')
+@csrf_exempt  
+def send_group_expense(request):
+    if(request.method=='POST'):
+        User.objects.get(username=request.user.username)
+        this_text=request.POST['subject']
+        this_date=request.POST['date']
+        this_time=datetime.datetime.now()
+        this_amount=request.POST['cost']
+        this_group_id=request.POST['idman']
+        id_gp=groupha.objects.get(id=this_group_id)
+        exp=group_expense.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=id_gp)
+        exp.save()
+        messages.add_message(request, messages.SUCCESS, "خرج جدید شما ثبت شد ")
+        con = {'groupid':id_gp.id}
+        return render(request,'userpanel/group.html' , context=con)  
 
 
-# @login_required(login_url='/login/')
-# @csrf_exempt  
-# def send_group_income(request):
-#     if(request.method=='POST'):
-#         User.objects.get(username=request.user.username)
-#         this_text=request.POST['subject']
-#         this_date=request.POST['date']
-#         this_time=datetime.datetime.now()
-#         this_amount=request.POST['cost']      
-#         exp=group_income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=)
-#         exp.save()
-#         messages.add_message(request, messages.SUCCESS, "درآمد جدید شما ثبت شد ")
-#         return redirect('/group/')
-
+@login_required(login_url='/login/')
+@csrf_exempt  
+def send_group_income(request):
+      if(request.method=='POST'):
+        User.objects.get(username=request.user.username)
+        this_text=request.POST['subject']
+        this_date=request.POST['date']
+        this_time=datetime.datetime.now()
+        this_amount=request.POST['cost']
+        this_group_id=request.POST['idman']
+        id_gp=groupha.objects.get(id=this_group_id)
+        exp=group_income.objects.create(user_name=request.user,text=this_text,time=this_time,date=this_date,amount=this_amount,this_group=id_gp)
+        exp.save()
+        messages.add_message(request, messages.SUCCESS, "دخل جدید شما ثبت شد ")
+        con = {'groupid':id_gp.id}
+        return render(request,'userpanel/group.html' , context=con) 
 
 

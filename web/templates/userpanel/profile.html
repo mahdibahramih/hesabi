@@ -31,23 +31,19 @@
     <div class="row">
         <div class="col-12">
             <div style="margin-top: 50px" class="card">
-
                 <div class="card-body">
-                    <div class="card-title mb-4">
-                        <div class="d-flex justify-content-start">
-                            <div class="image-container">
-                                <img src="{% static "userpanel/1.png" %}" id="imgProfile" style="width: 150px; height: 150px" class="person-img" />
-                                <div class="middle">
-                                    <input style="margin-left: 15px;margin-top: 10px" type="button" class="btn btn-secondary" id="btnChangePicture" value="تغییر عکس پروفایل" />
-                                    <input type="file" style="display: none;" id="profilePicture" name="file" />
-                                </div>
-                            </div>
-                            <div class="userData ml-3">
-                            
-                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"> {{ data_user.username }} </h2>
-                               
-                            </div>
+                    <div class="card-title mb-9">
+                    <form method='POST' action="/editpwd/">
+                        <div class="form-group">
+                            <label for="pwd">پسورد جدید:</label>
+                            <input type="password" class="form-control col-sm-5" id="pwd" name="pwd">
                         </div>
+                        <div class="form-group">
+                            <label for="pwd">تایید پسورد جدید:</label>
+                            <input type="password" class="form-control col-sm-5" id="pwdrepet" name="pwdrepet">
+                        <input value="تغییر پسورد " style="margin-left: 200px" type="submit" class=" button btn btn-default">
+                        </div>
+                        </form>
                     </div>
 
                     <form method='POST' action="/editprofile/">
@@ -67,14 +63,7 @@
                             <label >ایمیل :</label>
                             <input type="email" class="form-control col-sm-5" id="email" name="email"value={{data_user.email}}>
                         </div>
-                        <div class="form-group">
-                            <label for="pwd">پسورد جدید:</label>
-                            <input type="password" class="form-control col-sm-5" id="pwd" name="pwd">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">تایید پسورد جدید:</label>
-                            <input type="password" class="form-control col-sm-5" id="pwdrepet" name="pwdrepet">
-                        </div>
+                     
 
                         <input value="ثبت تغییرات" style="margin-left: 200px" type="submit" class="btn btn-default">
 
